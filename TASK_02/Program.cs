@@ -10,7 +10,7 @@
 // 1, 2 -> 4
 
 
-int[,] CreatArray(int m = 3, int n = 4)
+int[,] CreateArray(int m = 3, int n = 4)
 {
     Random rnd = new Random();
     int[,] array = new int[m, n];
@@ -38,18 +38,11 @@ void PrintArray(int[,] array)
     Console.WriteLine();
 }
 
-int InputLine(string msg)
+int InputInt(string msg)
 {
-    Console.Write(msg);
+    Console.Write(msg + " : ");
     return Convert.ToInt32(Console.ReadLine()) - 1;
 }
-
-int InputColumn(string msg)
-{
-    Console.Write(msg);
-    return Convert.ToInt32(Console.ReadLine()) - 1;
-}
-
 
 (bool, int, int) FindNumber(int[,] array, int line, int column)
 {
@@ -66,16 +59,15 @@ int InputColumn(string msg)
     return (false, 0, 0);
 }
 
-int[,] resultArray = CreatArray();
+int[,] resultArray = CreateArray();
 PrintArray(resultArray);
-int line = InputLine("Введите номер строки: ");
-int column = InputColumn("Введите номер столбца: ");
-
+int line = InputInt("Введите номер строки ");
+int column = InputInt("Введите номер столбца ");
 
 (bool check, int number, int number2) = FindNumber(resultArray, line, column);
 if (check)
 {
-    Console.WriteLine($"По данным координатам в массиве находится число: {number2} ");
+    Console.WriteLine($"По данным координатам в массиве находится число: {resultArray[number, number2]}");
 }
 else
 {
