@@ -7,66 +7,34 @@
 // 8 4 2 4
 // Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 
-int[,] CreateArray(int m = 3, int n = 4)
+
+
+Console.WriteLine("Задайте двумерный массив m x n");
+Console.Write("\nВведите m: ");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите n: ");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.Clear();
+
+Console.Write($"\nДвумерный массив размера 'm = {m}' на 'n = {n}':\n");
+int[,] matrix = new int[m, n];
+for (int i = 0; i < m; i++)
 {
-    Random rnd = new Random();
-    int[,] array = new int[3, 4];
-    for (int i = 0; i < array.GetLength(0); i++)
+    for (int j = 0; j < n; j++)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            array[i, j] = rnd.Next(0, 10);
-        }
+        matrix[i, j] = new Random().Next(1, 10);
+        Console.Write(matrix[i, j] + " ");
     }
-    return array;
+    Console.WriteLine();
 }
-
-void PrintArray(int[,] array)
+Console.Write("\nCреднее арифметическое элементов в каждом столбце\n");
+for (int i = 0; i < n; i++)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+    double number = 0;
+    for (int j = 0; j < m; j++)
     {
-        Console.WriteLine();
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write(array[i, j] + "\t");
-        }
-        Console.WriteLine();
+        number = (number + matrix[j, i]);
     }
+    Console.Write(Math.Round((number / m), 1) + "   ");
 }
-
-// double FindAverageColumn(int[,] array)
-// {
-//     for (int j = 0; j < array.GetLength(1); j++)
-//     {
-//         int sum = 0;
-//         double average;
-//         for (int i = 0; i < array.GetLength(0); i++)
-//         {
-//             sum += array[i, j];
-//         }
-//         average = sum / array.GetLength(0);
-//         return average;
-//     }
-//     return array.GetLength(1);
-// }
-
-double FindAverageColumn(int[,] array)
-{
-    for (int j = 0; j < array.GetLength(1); j++)
-    {
-        int sum = 0;
-        double average;
-        for (int i = 0; i < array.GetLength(0); i++)
-        {
-            sum += array[i, j];
-        }
-        return Enumerable.Range(0, array.GetLength(1)).Select(j => array.GetColumn(x).Sum() / array.GetLength(1));
-    }
-    return array.GetLength(1);
-}
-
-int[,] resultArray = CreateArray();
-PrintArray(resultArray);
-double averageColumn = FindAverageColumn(resultArray);
-Console.WriteLine($"Среднее арифметическое каждого столбца массива: {averageColumn:F1}; ");
 Console.WriteLine();
